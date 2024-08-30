@@ -1,0 +1,10 @@
+.imput_label{
+    position: relative;
+    input{
+
+    }
+    .error_msg{
+        position: absolute;
+        color: rgba(199, 44, 44, 0.874);
+    }
+}

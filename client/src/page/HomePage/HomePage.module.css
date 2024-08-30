@@ -1,0 +1,12 @@
+.home_page{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 20px;
+    h1{
+        font-size: 24px;
+        font-weight: 600;
+    }
+}

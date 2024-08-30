@@ -1,5 +1,4 @@
 import fs from "fs";
-import { generateRandomISBN } from "../helpers/generateRandomISBN.js";
 const DB_FILE = "../backend/db/db.json";
 
 const loadBooks = () => {
@@ -18,11 +17,11 @@ export const getAllBooks = (req, res) => {
   
   res.json(books);
 };
-export const createBook = (req, res) => {
+export const addBook = (req, res) => {
   const books = loadBooks();
-  const { title, author, isBorrowed = false } = req.body;
+  const { title, author,isbn, isBorrowed = false } = req.body;
   const newBook = {
-    isbn: generateRandomISBN(),
+    isbn,
     title,
     author,
     isBorrowed,
@@ -37,6 +36,7 @@ export const createBook = (req, res) => {
 export const updateBook = (req, res) => {
   const books = loadBooks();
   const { isbn } = req.params;
+console.log(isbn);
 
   let bookIndex;
   if (isbn) {
@@ -50,7 +50,7 @@ export const updateBook = (req, res) => {
   saveBooks(books);
   res.json({
     message: "Book updated successfully",
-    updatedBook: books[bookIndex],
+    book: books[bookIndex],
   });
 };
 
@@ -61,11 +61,11 @@ export const deleteBook = (req, res) => {
   if (books.length && isbn) {
     books = books.filter((book) => book.isbn !== isbn);
     saveBooks(books);
-    res.status(204).send();
+    res.status(200).json(isbn);
   }
 };
 
-export const toggleBorrow = (req, res) => {
+export const markAsBorrowed = (req, res) => {
   const books = loadBooks();
   const book = books.find((book) => book.isbn === req.params.isbn);
   if (!book) {

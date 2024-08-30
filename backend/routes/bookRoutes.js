@@ -1,13 +1,13 @@
 import express from 'express';
-import { createBook, deleteBook, getAllBooks, searchBooks, toggleBorrow, updateBook } from '../controllers/bookControllers.js';
+import { addBook, deleteBook, getAllBooks, searchBooks, markAsBorrowed, updateBook } from '../controllers/bookControllers.js';
 
 const bookRouter = express.Router()
 
 bookRouter.get('/', getAllBooks);
-bookRouter.post('/', createBook);
+bookRouter.post('/', addBook);
 bookRouter.put('/:isbn', updateBook);
 bookRouter.delete('/:isbn', deleteBook);
-bookRouter.patch('/:isbn/borrow', toggleBorrow);
+bookRouter.patch('/:isbn/borrow', markAsBorrowed);
 bookRouter.get('/search', searchBooks)
 
 
