@@ -37,9 +37,11 @@ const ItemBook = ({ book }) => {
         >
           {book.isBorrowed ? "Borrowed" : "Returned"}
         </Button>
-        <h2>{book.title}</h2>
-        <p>{book.author}</p>
-        <p className={s.isbn}>{book.isbn}</p>
+        <div className={s.book_info}>
+          <h2>{book.title}</h2>
+          <p>{book.author}</p>
+          <p className={s.isbn}>{book.isbn}</p>
+        </div>
         <div className={s.btns}>
           <button onClick={openModal}>
             <MdEdit />
