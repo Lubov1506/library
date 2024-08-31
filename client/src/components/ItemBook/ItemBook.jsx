@@ -6,6 +6,7 @@ import BookForm from "../BookForm/BookForm";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { deleteBookThunk } from "../../redux/books/operations";
+
 const ItemBook = ({ book }) => {
     const dispatch = useDispatch()
   const [isOpen, setIsOpen] = useState(false);
@@ -23,6 +24,7 @@ const ItemBook = ({ book }) => {
       <li className={s.item_book}>
         <h2>{book.title}</h2>
         <p>{book.author}</p>
+        <p className={s.isbn}>{book.isbn}</p>
         <div className={s.btns}>
           <button onClick={openModal}>
             <MdEdit />

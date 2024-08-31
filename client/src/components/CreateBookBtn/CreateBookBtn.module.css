@@ -1,3 +1,5 @@
 .create_book_btn{
-    align-self: flex-start;
+    position: sticky;
+    margin: 0 auto;
+    align-self: center;
 }

@@ -1,10 +1,21 @@
-.imput_label{
-    position: relative;
-    input{
-
+.imput_label {
+  position: relative;
+  input {
+    width: 100%;
+    padding: 5px 10px;
+    outline: none;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0px 0px 0px 3px rgba(118, 118, 118, 0.055);
+    transition: box-shadow var(--transition-pattern) ;
+    &:hover, &:focus{
+    box-shadow: 0px 0px 0px 3px rgba(118, 118, 118, 0.155);
     }
-    .error_msg{
-        position: absolute;
-        color: rgba(199, 44, 44, 0.874);
-    }
+  }
+  .error_msg {
+    font-size: 12px;
+    position: absolute;
+    bottom: -14px;
+    color: rgba(199, 44, 44, 0.874);
+  }
 }

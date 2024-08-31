@@ -1,0 +1,11 @@
+.btn{
+    padding: 10px 20px;
+    border-radius: 10px;
+    background-color: var(--button-bgc);
+    color: white;
+    font-weight: 500;
+    transition: background-color var(--transition-pattern);
+    &:hover, &:focus{
+        background-color: var(--button-hover-bgc);
+    }
+}

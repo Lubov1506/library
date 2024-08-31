@@ -3,23 +3,23 @@ const DB_FILE = "../backend/db/db.json";
 
 const loadBooks = () => {
   const data = fs.readFileSync(DB_FILE);
-  if(!data){
-    return 'Not books'
+  if (!data) {
+    return "Not books";
   }
   return JSON.parse(data).books;
 };
 const saveBooks = (books) => {
-  fs.writeFileSync(DB_FILE, JSON.stringify({books:[ ...books ]}, null, 2));
+  fs.writeFileSync(DB_FILE, JSON.stringify({ books: [...books] }, null, 2));
 };
 
 export const getAllBooks = (req, res) => {
   const books = loadBooks();
-  
+
   res.json(books);
 };
 export const addBook = (req, res) => {
   const books = loadBooks();
-  const { title, author,isbn, isBorrowed = false } = req.body;
+  const { title, author, isbn, isBorrowed = false } = req.body;
   const newBook = {
     isbn,
     title,
@@ -36,12 +36,11 @@ export const addBook = (req, res) => {
 export const updateBook = (req, res) => {
   const books = loadBooks();
   const { isbn } = req.params;
-console.log(isbn);
 
   let bookIndex;
   if (isbn) {
     bookIndex = books.findIndex((book) => book.isbn === isbn);
-    
+
     if (bookIndex === -1) {
       return res.status(404).json({ message: "Book not found" });
     }
@@ -56,7 +55,7 @@ console.log(isbn);
 
 export const deleteBook = (req, res) => {
   let books = loadBooks();
-  
+
   const { isbn } = req.params;
   if (books.length && isbn) {
     books = books.filter((book) => book.isbn !== isbn);
@@ -77,16 +76,19 @@ export const markAsBorrowed = (req, res) => {
 };
 
 export const searchBooks = (req, res) => {
-  const query = req.query.query.toLowerCase();
+  const { query } = req.query;
+
+  const lowerCaseQuery = query.toLowerCase();
   const books = loadBooks();
   const results = books.filter(
     (book) =>
-      book.title.toLowerCase().includes(query) ||
-      book.author.toLowerCase().includes(query) ||
-      book.isbn.includes(query)
+      book.title.toLowerCase().includes(lowerCaseQuery) ||
+      book.author.toLowerCase().includes(lowerCaseQuery) ||
+      book.isbn.includes(lowerCaseQuery)
   );
-  if(!results.length){
-    res.json({message: 'That book not found'})
+  if (!results.length) {
+    return res.json({ message: "That book not found" });
   }
-  res.json(results)
+
+  res.json({ books: results });
 };

@@ -5,6 +5,7 @@ import { bookFormScheme } from "../../schemes/bookFormScheme.js";
 import { getBookFormOptions } from "./getBookFormOptions.js";
 import s from "./BookForm.module.css";
 import InputField from "../InputField/InputField.jsx";
+import Button from "../Button/Button.jsx";
 const BookForm = ({ type, book = {}, onClose }) => {
   const options = getBookFormOptions(type, book);
 
@@ -20,8 +21,6 @@ const BookForm = ({ type, book = {}, onClose }) => {
     mode: "onChange",
   });
   const onSubmit = (data) => {
-    console.log(data);
-
     dispatch(options.onSubmitThunk(data));
 
     reset();
@@ -55,7 +54,7 @@ const BookForm = ({ type, book = {}, onClose }) => {
         errors={errors}
       />
 
-      <button>{type === "add" ? "Add book" : "Update"}</button>
+      <Button>{type === "add" ? "Add book" : "Update"}</Button>
     </form>
   );
 };

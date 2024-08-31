@@ -3,11 +3,14 @@ import {
   addBookThunk,
   deleteBookThunk,
   fetchBooksThunk,
+  searchBookThunk,
   updateBookThunk,
 } from "./operations";
 
 const initialState = {
   books: [],
+  searchBooks: [],
+  searchMessage: "",
   isLoading: false,
   isError: false,
 };
@@ -17,13 +20,22 @@ const slice = createSlice({
   initialState,
   selectors: {
     selectBooks: (state) => state.books,
+    selectSearchBooks: (state) => state.searchBooks,
+    selectSearchMessage: (state) => state.searchMessage,
     selectIsLoading: (state) => state.isLoading,
     selectIsError: (state) => state.isError,
+  },
+  reducers: {
+    showAllBooks: (state, action) => {
+      state.searchBooks = state.books;
+      state.searchMessage = "";
+    },
   },
   extraReducers: (builder) => {
     builder
       .addCase(fetchBooksThunk.fulfilled, (state, { payload }) => {
         state.books = payload;
+        state.searchBooks = payload;
       })
       .addCase(addBookThunk.fulfilled, (state, { payload }) => {
         state.books.push(payload.newBook);
@@ -35,9 +47,16 @@ const slice = createSlice({
         state.books[updatedBookIndex] = { ...payload.book };
       })
       .addCase(deleteBookThunk.fulfilled, (state, { payload }) => {
-        console.log(payload);
-        
         state.books = state.books.filter((book) => book.isbn !== payload);
+      })
+      .addCase(searchBookThunk.fulfilled, (state, { payload }) => {
+        if (payload.books) {
+          state.searchBooks = payload.books;
+          state.searchMessage = "";
+        } else {
+          state.searchBooks = [];
+          state.searchMessage = "Not found books";
+        }
       })
       .addMatcher(
         isAnyOf(
@@ -75,4 +94,11 @@ const slice = createSlice({
 });
 
 export const bookReducer = slice.reducer;
-export const { selectBooks, selectIsLoading, selectIsError } = slice.selectors;
+export const { showAllBooks } = slice.actions;
+export const {
+  selectBooks,
+  selectSearchBooks,
+  selectSearchMessage,
+  selectIsLoading,
+  selectIsError,
+} = slice.selectors;

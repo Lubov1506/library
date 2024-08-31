@@ -1,0 +1,11 @@
+.search_bar{
+    align-self: start;
+    display: flex;
+    gap: 15px;
+    min-width: 300px;
+    height: 40px;
+    align-items: stretch;
+    input{
+        height: 100%;
+    }
+}

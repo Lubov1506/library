@@ -1,21 +1,45 @@
-.item_book{
-    position: relative;
-    padding: 10px;
-    padding-bottom: 20px;
-    width: 280px;
-    box-shadow: 0px 0px 0px 3px rgba(118, 118, 118, 0.055);
-    .btns{
-        position: absolute;
-        bottom: 10px;
-        right: 20px;
-        display: flex;
-        gap: 5px;
-        button{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 2px;
-            cursor: pointer;
-        }
+.item_book {
+  position: relative;
+  padding: 10px;
+  padding-bottom: 20px;
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  box-shadow: 0px 0px 0px 3px rgba(118, 118, 118, 0.055);
+  h2 {
+    font-size: 18px;
+    font-weight: 600;
+  }
+  p {
+    font-size: 16px;
+  }
+  .isbn {
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .btns {
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+    display: flex;
+    gap: 5px;
+    button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 5px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: color var(--transition-pattern),
+        background-color var(--transition-pattern);
+
+      &:hover,
+      &:focus {
+        background-color: var(--button-bgc);
+        color: white;
+      }
     }
+  }
 }

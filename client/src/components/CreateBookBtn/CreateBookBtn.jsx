@@ -2,6 +2,7 @@ import { useState } from "react";
 import s from "./CreateBookBtn.module.css";
 import Modal from "../Modal/Modal";
 import BookForm from "../BookForm/BookForm";
+import Button from "../Button/Button";
 const CreateBookBtn = () => {
   const [isOpen, setIsOpen] = useState(false);
   const openModal = () => {
@@ -12,9 +13,9 @@ const CreateBookBtn = () => {
   };
   return (
     <>
-      <button className={s.create_book_btn} onClick={openModal}>
+      <Button className={s.create_btn} onClick={openModal}>
         Add book
-      </button>
+      </Button>
 
       {isOpen && (
         <Modal onClose={closeModal} title="Add new book">

@@ -29,7 +29,6 @@ export const addBookThunk = createAsyncThunk(
 export const updateBookThunk = createAsyncThunk(
   "books/updateBook",
   async (book, thunkApi) => {
-
     try {
       const { data } = await axios.put(`books/${book.isbn}`, book);
       return data;
@@ -41,10 +40,21 @@ export const updateBookThunk = createAsyncThunk(
 export const deleteBookThunk = createAsyncThunk(
   "books/deleteBook",
   async (bookISBN, thunkApi) => {
-    console.log(bookISBN);
-    
     try {
       const { data } = await axios.delete(`books/${bookISBN}`);
+      return data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+);
+export const searchBookThunk = createAsyncThunk(
+  "books/searchBook",
+  async (query, thunkApi) => {
+    try {
+      const { data } = await axios.get(`books/search`, {
+        params: { ...query },
+      });
       return data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);

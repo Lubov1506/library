@@ -1,24 +1,34 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchBooksThunk } from "../../redux/books/operations";
-import { selectBooks } from "../../redux/books/slice";
+import { useSelector } from "react-redux";
+import {
+  selectBooks,
+  selectSearchBooks,
+  selectSearchMessage,
+} from "../../redux/books/slice";
 import ItemBook from "../ItemBook/ItemBook";
-import s from './ListBooks.module.css'
+import s from "./ListBooks.module.css";
+
 const ListBooks = () => {
   const books = useSelector(selectBooks);
-  console.log(books);
-  
+  const searchBooks = useSelector(selectSearchBooks);
+  const searchMessage = useSelector(selectSearchMessage);
+
   return (
-    <div>
-      ListBooks
-      {books && (
+    <section className={s.list_books_wrap}>
+      <h2>Your books</h2>
+      {searchMessage && <p>{searchMessage}</p>}
+      {!searchMessage && !!searchBooks.length && (
         <ul className={s.list_books}>
-          {books.map((book, idx) => {
+          {searchBooks.map((book, idx) => {
             return <ItemBook key={idx} book={book} />;
           })}
         </ul>
       )}
-    </div>
+      {!books.length && (
+        <p className={s.empty_list_info}>
+          You don&apos;t have any book yet, add one right now!
+        </p>
+      )}
+    </section>
   );
 };
 export default ListBooks;
