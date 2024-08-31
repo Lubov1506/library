@@ -72,7 +72,7 @@ export const markAsBorrowed = (req, res) => {
   }
   book.isBorrowed = !book.isBorrowed;
   saveBooks(books);
-  res.json(book);
+  res.json(book.isbn);
 };
 
 export const searchBooks = (req, res) => {

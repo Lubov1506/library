@@ -61,3 +61,15 @@ export const searchBookThunk = createAsyncThunk(
     }
   }
 );
+
+export const markAsBorrowedThunk = createAsyncThunk(
+  "books/markAsBorrowed",
+  async (bookISBN, thunkApi) => {
+    try {
+      const { data } = await axios.patch(`books/${bookISBN}/borrow`);
+      return data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+);

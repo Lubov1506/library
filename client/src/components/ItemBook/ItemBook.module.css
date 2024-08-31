@@ -6,7 +6,20 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-
+  .is_borrowed {
+    border: 1px solid var(--button-bgc);
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 5px;
+    font-size: 14px;
+    transition: color var(--transition-pattern),
+      background-color var(--transition-pattern);
+  }
+  .is_returned {
+    background-color: transparent;
+    color: var(--button-bgc);
+  }
   box-shadow: 0px 0px 0px 3px rgba(118, 118, 118, 0.055);
   h2 {
     font-size: 18px;

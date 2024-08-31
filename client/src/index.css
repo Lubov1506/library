@@ -1,12 +1,12 @@
-@import url('./css//reset.css');
-:root{
-    --button-bgc:rgb(32, 32, 108);
-    --button-hover-bgc:rgb(23, 23, 82);
-    --transition-pattern: 300ms cubic-bezier(0.165, 0.84, 0.44, 1);
+@import url("./css//reset.css");
+:root {
+  --button-bgc: rgb(32, 32, 108);
+  --button-hover-bgc: rgb(23, 23, 82);
+  --transition-pattern: 300ms cubic-bezier(0.165, 0.84, 0.44, 1);
 }
-button{
-    background-color: transparent;
+button {
+  background-color: transparent;
 }
-body{
-    font-family: sans-serif;
+body {
+  font-family: sans-serif;
 }

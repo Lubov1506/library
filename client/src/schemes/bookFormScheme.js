@@ -14,17 +14,17 @@ export const bookFormScheme = yup
       .required("Author is required"),
     isbn: yup
       .string()
-      .matches(/^978-\d-\d{1,5}-\d{1,7}-\d$/, 'Invalid format')
+      .matches(/^978-\d-\d{1,5}-\d{1,7}-\d$/, "Invalid format")
       .required("ISBN is required"),
   })
   .required();
 
 export const searchFormScheme = yup
-.object({
-  query: yup
-    .string()
-    .min(2, "Query must be at least 2 characters long")
-    .max(64, "Query must be at most 64 characters long")
-    .required("Query is required"),
-})
-.required();
+  .object({
+    query: yup
+      .string()
+      .min(2, "Query must be at least 2 characters long")
+      .max(64, "Query must be at most 64 characters long")
+      .required("Query is required"),
+  })
+  .required();

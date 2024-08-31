@@ -7,9 +7,10 @@
     border-radius: 5px;
     border: none;
     box-shadow: 0px 0px 0px 3px rgba(118, 118, 118, 0.055);
-    transition: box-shadow var(--transition-pattern) ;
-    &:hover, &:focus{
-    box-shadow: 0px 0px 0px 3px rgba(118, 118, 118, 0.155);
+    transition: box-shadow var(--transition-pattern);
+    &:hover,
+    &:focus {
+      box-shadow: 0px 0px 0px 3px rgba(118, 118, 118, 0.155);
     }
   }
   .error_msg {

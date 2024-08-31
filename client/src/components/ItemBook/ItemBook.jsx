@@ -5,10 +5,15 @@ import Modal from "../Modal/Modal";
 import BookForm from "../BookForm/BookForm";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { deleteBookThunk } from "../../redux/books/operations";
+import {
+  deleteBookThunk,
+  markAsBorrowedThunk,
+} from "../../redux/books/operations";
+import Button from "../Button/Button";
+import clsx from "clsx";
 
 const ItemBook = ({ book }) => {
-    const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
   const openModal = () => {
     setIsOpen(true);
@@ -16,12 +21,22 @@ const ItemBook = ({ book }) => {
   const closeModal = () => {
     setIsOpen(false);
   };
-  const handleDelete = (bookISBN)=>{
-    dispatch(deleteBookThunk(bookISBN))
-  }
+  const handleDelete = (bookISBN) => {
+    dispatch(deleteBookThunk(bookISBN));
+  };
+  const handleMarkBorrowed = (bookISBN) => {
+    dispatch(markAsBorrowedThunk(bookISBN));
+  };
   return (
     <>
       <li className={s.item_book}>
+        <Button
+          className={clsx(s.is_borrowed, { [s.is_returned]: !book.isBorrowed })}
+          type="button"
+          onClick={() => handleMarkBorrowed(book.isbn)}
+        >
+          {book.isBorrowed ? "Borrowed" : "Returned"}
+        </Button>
         <h2>{book.title}</h2>
         <p>{book.author}</p>
         <p className={s.isbn}>{book.isbn}</p>
@@ -29,7 +44,7 @@ const ItemBook = ({ book }) => {
           <button onClick={openModal}>
             <MdEdit />
           </button>
-          <button onClick={()=>handleDelete(book.isbn)}>
+          <button onClick={() => handleDelete(book.isbn)}>
             <FaRegTrashAlt />
           </button>
         </div>

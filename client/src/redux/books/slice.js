@@ -3,6 +3,7 @@ import {
   addBookThunk,
   deleteBookThunk,
   fetchBooksThunk,
+  markAsBorrowedThunk,
   searchBookThunk,
   updateBookThunk,
 } from "./operations";
@@ -58,11 +59,19 @@ const slice = createSlice({
           state.searchMessage = "Not found books";
         }
       })
+      .addCase(markAsBorrowedThunk.fulfilled, (state, { payload }) => {
+        const markedBook = state.books.find((book) => book.isbn === payload);
+
+        markedBook.isBorrowed = !markedBook.isBorrowed;
+        state.searchBooks = state.books;
+      })
       .addMatcher(
         isAnyOf(
           fetchBooksThunk.pending,
           addBookThunk.pending,
-          updateBookThunk.pending
+          updateBookThunk.pending,
+          deleteBookThunk.pending,
+          searchBookThunk.pending
         ),
         (state) => {
           state.error = false;
@@ -73,7 +82,9 @@ const slice = createSlice({
         isAnyOf(
           fetchBooksThunk.rejected,
           addBookThunk.rejected,
-          updateBookThunk.rejected
+          updateBookThunk.rejected,
+          deleteBookThunk.rejected,
+          searchBookThunk.rejected
         ),
         (state) => {
           state.isLoading = false;
@@ -84,7 +95,9 @@ const slice = createSlice({
         isAnyOf(
           fetchBooksThunk.fulfilled,
           addBookThunk.fulfilled,
-          updateBookThunk.fulfilled
+          updateBookThunk.fulfilled,
+          deleteBookThunk.fulfilled,
+          searchBookThunk.fulfilled
         ),
         (state) => {
           state.isLoading = false;
